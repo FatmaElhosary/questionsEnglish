@@ -10,12 +10,24 @@ import { DialogAnswerComponent } from '../dialog-answer/dialog-answer.component'
 })
 export class EnglishQuestionsComponent implements OnInit {
   questions = [];
-  constructor(private _english: EnglishService, public dialog: MatDialog) {}
+  private content: string;
+    public query: string="Lorem ipsum";
+  constructor(private _english: EnglishService, public dialog: MatDialog) {
+    this.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a quam ornare, bibendum ligula a, rhoncus ligula. Etiam aliquet, justo sollicitudin imperdiet luctus, nulla justo sodales mi, sit amet semper nisl velit vel massa. In hac habitasse platea dictumst.";
+
+  }
 
   ngOnInit(): void {
     this.getAllParagraphs();
   }
-
+  public highlight() {
+    if(!this.query) {
+        return this.content;
+    }
+    return this.content.replace(new RegExp(this.query, "gi"), match => {
+        return '<span class="highlightText">' + match + '</span>';
+    });
+}
   getAllParagraphs() {
     this._english.getAllParagraph().subscribe((data) => {
       console.log(data.questions);

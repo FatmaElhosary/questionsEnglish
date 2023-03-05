@@ -1,5 +1,8 @@
 <div class="container py-5">
-
+  <!-- <div>
+    <input type="text" [(ngModel)]="query" placeholder="Query..." />
+</div> -->
+  <p [innerHTML]="highlight()"></p>
   <div class="row">
     <div class="question" *ngFor="let question of questions">
      <p>{{ question['paragraph'] }}</p>

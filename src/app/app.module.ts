@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePickerComponent }from './components/date-picker/date-picker.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+
 import { EnglishQuestionsComponent } from './components/english-questions/english-questions.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogAnswerComponent } from './components/dialog-answer/dialog-answer.component';
@@ -18,8 +21,14 @@ import { QuestionComponent } from './shared/question/question.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DatePickerComponent, EnglishQuestionsComponent, DialogAnswerComponent, QuestionComponent],
-  entryComponents:[DialogAnswerComponent],
+  declarations: [
+    AppComponent,
+    DatePickerComponent,
+    EnglishQuestionsComponent,
+    DialogAnswerComponent,
+    QuestionComponent,
+  ],
+  entryComponents: [DialogAnswerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +41,7 @@ import { QuestionComponent } from './shared/question/question.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatDialogModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

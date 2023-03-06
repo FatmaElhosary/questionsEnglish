@@ -18,9 +18,9 @@ export class QuestionComponent implements OnInit {
     console.log(this.question);
 
   }
-  doClick(quesI :number, ansI = 0) {
-
-    this.query = this.question.questions[quesI].answers[ansI].why;
+  doClick(quesI :any) {
+    
+    this.query = this.question.questions[quesI].why;
     this.highlight();
     this.openDialog.emit();
   }

@@ -32,7 +32,7 @@ export class EnglishQuestionsComponent implements OnInit {
   } */
   getAllParagraphs() {
     this._english.getAllParagraph().subscribe((data) => {
-      // console.log(data.data);
+       console.log(data.data);
       this.questions = data.data;
       // this.content = this.questions[0].paragraph;
       // this.query = this.questions[0].questions[0].answers[0].why[0];

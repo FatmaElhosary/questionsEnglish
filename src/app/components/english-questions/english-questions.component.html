@@ -1,19 +1,26 @@
 <div class="container py-5">
-  <!-- <div>
-    <input type="text" [(ngModel)]="query" placeholder="Query..." />
-</div> -->
-  <p [innerHTML]="highlight()"></p>
+
   <div class="row">
-    <div class="paragraph" *ngFor="let question of questions  let i = index">
-     <p>{{ question['paragraph'] }}</p>
-     <li>{{ i }}</li>
-     <div class="questions" *ngFor="let q of question['questions']">
-      <div class="question">
-             <h2>{{ q.question }}</h2>
-             <button mat-raised-button (click)="openDialog(i)">Show Answers</button>
-      </div>
-     </div>
+    <div class="paragraph" *ngFor="let question of questions; let i = index">
+      <app-question [question]="question" (openDialog)="openDialog(i)" [quesI]="i" ></app-question>
+<!--         <p [innerHTML]="highlight()">{{ question["paragraph"] }}</p>
+      <li>{{ i }}</li>
+
+      <div class="questions" *ngFor="let q of question['questions']">
+        <div class="question">
+          <h2>{{ q.question }}</h2>
+          <ul *ngFor="let answer of q['answers']">
+            <li>{{ answer.answer }}</li>
+          </ul>
+          <button mat-raised-button (click)="openDialog(i)">
+            Show Answers
+          </button>
+        </div>
+      </div> -->
 
     </div>
   </div>
 </div>
+
+<!--
+     -->

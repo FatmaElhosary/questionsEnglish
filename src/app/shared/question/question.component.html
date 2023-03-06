@@ -1,1 +1,15 @@
-<p>question works!</p>
+
+
+     <p [innerHTML]="highlight()">{{ question["paragraph"] }}</p>
+      <div class="questions" *ngFor="let q of question['questions']">
+        <div class="question">
+          <h2>{{ q.question }}</h2>
+        <ul *ngFor="let answer of q['answers']; let i =index">
+            <li>{{ answer.answer }}</li>
+          </ul>
+          <button mat-raised-button (click)="doClick(0)">
+            Show Answers
+          </button>
+        </div>
+      </div>
+

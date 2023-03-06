@@ -1,8 +1,36 @@
 
 {
     "data":[
-{"id":"1","paragraph":"English texts for beginners to practice reading and comprehension online and for free. Practicing your comprehension of written English will both improve your vocabulary and understanding of grammar and word order. The texts below are designed to help you develop while giving you an instant evaluation of your progress." ,
-"questions":[{"question":"What would your perfect day be like?","answers":{"id":"1","ans_num":"A","answer":"Junary"}},{"question":"Question 2????????????","answers":{"id":"2","ans_num":"B","answer":"Feb"}},{"question":"question3???????????????????","answers":{"id":"3","ans_num":"C","answer":"Aprill"}}]}
+{
+  "id":"1","paragraph":"To stay healthy, it’s very important to eat a variety of food, specially fruit and vegetables. It is very important to have good breakfast in the morning. You shouldn’t have sweets every day.Most of our body is water, so it is necessary to drink plenty of water every day. You shouldn’t drink a lot of fizzy drinks because they aren’t good for your health. You shouldn’t watch TV or play on the computer more than one hour a day." ,
+"questions":[{"question":"What’s the main idea of the text?","answers":[{"id":"1","ans_num":"A","answer":"Staying healthy1","why":["fruit and vegetables","good breakfast"]},
+{"id":"2","ans_num":"B","answer":"Healthy and unhealthy food2","why":["comprehension online","written English"]},
+{"id":"3","ans_num":"C","answer":"How to be healthy3","why":["comprehension online","written English"]}
+
     ]
+  },{"question":"Summarize the first paragraph in one sentence.","answers":[{"id":"1","ans_num":"A","answer":"Fruit and vegetables are very healthy.","why":["specially fruit","good breakfast"]},
+{"id":"2","ans_num":"B","answer":"Eating variety of food is important.","why":["comprehension online","written English"]},
+{"id":"3","ans_num":"C","answer":"We shouldn’t eat sweets to stay healthy.","why":["comprehension online","written English"]}
+
+    ]},{"question":"Summarize the second paragraph in one sentence.","answers":[{"id":"1","ans_num":"A","answer":"Water is very important for our bodies.","why":["specially fruit","sweets"]},
+{"id":"2","ans_num":"B","answer":"Fizzy drinks are very bad for us.","why":["comprehension online","written English"]},
+{"id":"3","ans_num":"C","answer":"We should watch TV for one hour a day","why":["comprehension online","written English"]}
+
+    ]}
+  ]
+
+},
+{
+  "id":"1","paragraph":"" ,
+"questions":[{"question":"Write a paragraph about“ My favorite place”","answers":[{"id":"1","ans_num":"A","answer":"Staying healthy1"},
+{"id":"2","ans_num":"B","answer":"Healthy and unhealthy food2"},
+{"id":"3","ans_num":"C","answer":"How to be healthy3"}
+
+    ]
+  }
+  ]
+
+}
+]
 }
 

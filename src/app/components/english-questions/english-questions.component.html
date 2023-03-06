@@ -1,9 +1,15 @@
 <div class="container py-5">
 
   <div class="row">
-    <div class="question" *ngFor="let question of questions">
+    <div class="paragraph" *ngFor="let question of questions  let i = index">
      <p>{{ question['paragraph'] }}</p>
-    <button mat-raised-button (click)="openDialog()">Show Answers</button>
+     <li>{{ i }}</li>
+     <div class="questions" *ngFor="let q of question['questions']">
+      <div class="question">
+             <h2>{{ q.question }}</h2>
+             <button mat-raised-button (click)="openDialog(i)">Show Answers</button>
+      </div>
+     </div>
 
     </div>
   </div>

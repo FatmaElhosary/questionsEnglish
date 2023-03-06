@@ -18,11 +18,12 @@ export class EnglishQuestionsComponent implements OnInit {
 
   getAllParagraphs() {
     this._english.getAllParagraph().subscribe((data) => {
-      console.log(data.questions);
-      this.questions = data.questions;
+      console.log(data.data);
+      this.questions = data.data;
     });
   }
-  openDialog(): void {
+  openDialog(i:number): void {
+   let answers=this.questions.filter(q=>{q})
    let dialogRef = this.dialog.open(
      DialogAnswerComponent,
      {

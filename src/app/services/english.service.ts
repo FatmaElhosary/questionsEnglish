@@ -5,9 +5,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EnglishService {
-  constructor(private _http: HttpClient) {}
+  questions:any;
+  constructor(private _http: HttpClient) {
+    this.getAllParagraph().subscribe(res=>{
+      this.questions=res.data;
+    })
+  }
 
   getAllParagraph(): Observable<any> {
    return this._http.get('../../assets/english.json');
+  }
+
+
+  getParagraph(id:number):Observable<any>{
+    return this._http.get(`../../assets/english.json/${id}`);
   }
 }

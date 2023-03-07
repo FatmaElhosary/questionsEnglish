@@ -5,6 +5,7 @@
       "paragraph": "To stay healthy, it’s very important to eat a variety of food, specially fruit and vegetables. It is very important to have good breakfast in the morning. You shouldn’t have sweets every day.Most of our body is water, so it is necessary to drink plenty of water every day. You shouldn’t drink a lot of fizzy drinks because they aren’t good for your health. You shouldn’t watch TV or play on the computer more than one hour a day.",
       "questions": [
         {
+          "id":"1",
           "question": "What’s the main idea of the text?",
           "answers": [
             {
@@ -29,30 +30,32 @@
           ]
         },
         {
+          "id":"2",
           "question": "Summarize the first paragraph in one sentence.",
           "answers": [
             {
               "id": "1",
               "ans_num": "A",
-              "answer": "Fruit and vegetables are very healthy."
+              "answer": "2222Fruit and vegetables are very healthy."
             },
             {
               "id": "2",
               "ans_num": "B",
-              "answer": "Eating variety of food is important."
+              "answer": "2222Eating variety of food is important."
             },
             {
               "id": "3",
               "ans_num": "C",
-              "answer": "We shouldn’t eat sweets to stay healthy."
+              "answer": "222222We shouldn’t eat sweets to stay healthy."
             }
           ],
           "why": [
-            "fruit and vegetables",
+            "fruit",
             "good breakfast"
           ]
         },
         {
+          "id": "3",
           "question": "Summarize the second paragraph in one sentence.",
           "answers": [
             {
@@ -72,17 +75,18 @@
             }
           ],
           "why": [
-            "fruit and vegetables",
-            "good breakfast"
+            " vegetables",
+            " breakfast"
           ]
         }
       ]
     },
     {
       "id": "2",
-      "paragraph": "",
+      "paragraph": "paragraph2",
       "questions": [
         {
+          "id": "1",
           "question": "Write a paragraph about“ My favorite place",
           "answers": [
             {

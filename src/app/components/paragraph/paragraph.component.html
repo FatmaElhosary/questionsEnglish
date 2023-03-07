@@ -1,0 +1,44 @@
+<div class="container py-5">
+  <div class="row">
+    <!--  <app-question [question]="question"  ></app-question> -->
+    <div class="not-found" *ngIf="!paragraph; else elseBlock">NotFound</div>
+
+    <ng-template #elseBlock>
+      <p [innerHTML]="highlight()">{{ paragraph["paragraph"] }}</p>
+      <h1 class="mt-2">Questions:</h1>
+      <div
+        class="questions"
+        *ngFor="
+          let question of paragraph.questions
+            | paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page
+
+                };
+          let i = index
+        "
+      >
+        <h2>{{ question.question }}</h2>
+        <button (click)="showAnswer()">Show Suggestion</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </div>
+      <div class="suggest w-100 h-20 bg-light">
+        <p>{{ answer }}</p>
+      </div>
+    </ng-template>
+  </div>
+  <div class="controlls d-flex justify-content-between">
+    <button (click)="goToPre()">Pre</button>
+    <button (click)="goToNext()">Next</button>
+  </div>
+</div>
+<!-- <router-outlet></router-outlet>
+ -->

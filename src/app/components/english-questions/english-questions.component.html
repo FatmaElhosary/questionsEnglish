@@ -1,7 +1,7 @@
 <div class="container py-5">
 
   <div class="row">
-    <div class="paragraph" *ngFor="let question of questions; let i = index">
+ <div class="paragraph" *ngFor="let question of questions; let i = index">
       <app-question [question]="question" (openDialog)="openDialog(i)" [quesI]="i" ></app-question>
 <!--         <p [innerHTML]="highlight()">{{ question["paragraph"] }}</p>
       <li>{{ i }}</li>
@@ -18,9 +18,7 @@
         </div>
       </div> -->
 
-    </div>
-        
-
+   </div>
   </div>
 </div>
 

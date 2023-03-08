@@ -2,9 +2,9 @@
   <div class="row">
     <!--  <app-question [question]="question"  ></app-question> -->
     <div class="not-found" *ngIf="!paragraph; else elseBlock">NotFound</div>
-
+<!--  [innerHTML]="highlight()" -->
     <ng-template #elseBlock>
-      <p [innerHTML]="highlight()">{{ paragraph["paragraph"] }}</p>
+      <p [innerHTML]="doHighlight==true?(paragraph['paragraph']|highlight:paragraph.questions[questinID].why): (paragraph['paragraph'])"></p>
       <h1 class="mt-2">Questions:</h1>
       <div
         class="questions"
@@ -19,16 +19,16 @@
           let i = index
         "
       >
-        <h2>{{ question.question }}</h2>
+        <h2 >{{ question.question}}</h2>
         <button (click)="showAnswer()">Show Suggestion</button>
       </div>
       <div class="d-flex justify-content-center">
         <pagination-controls
           previousLabel="Prev"
           nextLabel="Next"
-          (pageChange)="onTableDataChange($event)"
+          (pageChange)="onPaginate($event) "
         >
-        </pagination-controls>
+   </pagination-controls>
       </div>
       <div class="suggest w-100 h-20 bg-light">
         <p>{{ answer }}</p>

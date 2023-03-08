@@ -6,21 +6,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePickerComponent }from './components/date-picker/date-picker.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-import { EnglishQuestionsComponent } from './components/english-questions/english-questions.component';
 import { HttpClientModule } from '@angular/common/http';
-import { DialogAnswerComponent } from './components/dialog-answer/dialog-answer.component';
-import { QuestionComponent } from './shared/question/question.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
 import { ActivatedRouteSnapshot, RouteReuseStrategy } from '@angular/router';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
@@ -44,12 +39,10 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   declarations: [
     AppComponent,
     DatePickerComponent,
-    EnglishQuestionsComponent,
-    DialogAnswerComponent,
-    QuestionComponent,
     ParagraphComponent,
+    HighlightPipe,
   ],
-  entryComponents: [DialogAnswerComponent],
+ /*  entryComponents: [DialogAnswerComponent], */
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -61,11 +54,10 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatDialogModule,
-    MatPaginatorModule,
     NgxPaginationModule,
   ],
   providers: [
+    ///to change view in navigation link change
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
   ],
   bootstrap: [AppComponent],

@@ -17,7 +17,8 @@ export class ParagraphComponent implements OnInit {
   paragraph: any;
   paragraphs: any;
   questions: any;
-  paraId: number = 1;
+  paraId: number ;
+  doHighlight:boolean=false;
   /*  answers: any[] = []; */
   answer: string = '';
   query: string[] = [];
@@ -85,12 +86,14 @@ export class ParagraphComponent implements OnInit {
   ////////////////////////////////////////
   showAnswer() {
     this.query = this.paragraph.questions[this.questinID].why;
-    this.highlight();
+    this.doHighlight=true;
+   // this.highlight();
     this.answer = this.chooser().answer;
   }
 
-  onTableDataChange(event: any) {
+  onPaginate(event: any) {
     // console.log('event', event);
+    this.doHighlight = false;
     this.answer = '';
     this.query = [];
     this.page = event;
@@ -99,7 +102,7 @@ export class ParagraphComponent implements OnInit {
     this.changeQuestion();
   }
   ///highlight paragraph //////////////////////
-  public highlight() {
+ /*  public highlight() {
     //this.query = this.paragraph.questions[this.questinID].why;
     console.log(this.query);
 
@@ -112,7 +115,7 @@ export class ParagraphComponent implements OnInit {
         return '<span class="highlightText">' + match + '</span>';
       }
     );
-  }
+  } */
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

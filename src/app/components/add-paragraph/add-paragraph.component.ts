@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EnglishService } from '../../services/english.service';
 import {
   FormArray,
   FormBuilder,
@@ -13,7 +14,7 @@ import {
   styleUrls: ['./add-paragraph.component.scss'],
 })
 export class AddParagraphComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private _EnglishService:EnglishService) {}
   questionForm: FormGroup = this.fb.group({
     paragraph: ['', Validators.required],
     qNumber: [''],
@@ -77,7 +78,7 @@ export class AddParagraphComponent implements OnInit {
   addQuestion() {
     this.questions.push(
       this.fb.group({
-        question: '',
+        question: ['',Validators.required],
         answers: this.fb.array([]),
      /*    [
           this.fb.group({
@@ -91,13 +92,29 @@ export class AddParagraphComponent implements OnInit {
   deleteQuestion(questionIndex: number) {
     this.questions.removeAt(questionIndex);
   }
+  ///////////////////////////////answers/////////////////////////
+  /*  get answers(): FormArray {
+    return this.questionForm.get('question.answers') as FormArray;
+  }
+  newAnswer(): FormGroup {
+    return this.fb.group({
+      answer: '',
+      why: this.fb.array([this.fb.control('')]),
+    });
+  } */
 
+  /*  addAnswer() {
+    this.answers.push(this.newAnswer());
+  }
+  deleteAnswer(questionIndex,answerIndex: number) {
+    this.answers.removeAt(answerIndex);
+  } */
   addNewAnswer(control) {
       control.push(
-        this.fb.group({
-          answer: '',
-          why: this.fb.array([this.fb.group({ key: '' })]),
-        })
+       this.fb.group({
+            answer: ['',Validators.required],
+            why: this.fb.array([this.fb.group({ key: ['',Validators.required] })]),
+          }),
       );
   }
 
@@ -146,5 +163,12 @@ export class AddParagraphComponent implements OnInit {
   /////////////////////////////////////////////////////////////////////////////////////////
   addParagraph() {
     console.log(this.questionForm.value);
+    if(this.questionForm.valid){
+this._EnglishService.addParagraph(this.questionForm.value).subscribe(res=>{
+  console.log(res);
+
+});
+    }
+
   }
 }

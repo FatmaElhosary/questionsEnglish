@@ -1,7 +1,7 @@
 <section class="my-4">
   <div class="container">
     <h3>Add New Question:</h3>
-    <form class="add-lessons-form" [formGroup]="questionForm">
+    <form class="add-lessons-form" [formGroup]="questionForm" >
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Question Number</mat-label>
         <input matInput formControlName="qNumber" />
@@ -28,7 +28,7 @@
           + Add question
         </button>
 
-        <div *ngFor="let q of questions.controls; let questionIndex = index" class="border p-3 mt-2">
+        <div *ngFor="let q of questions.controls; let questionIndex = index" class="border p-3 mt-2 bg-light">
           <!-- The repeated alias template -->
           <div [formGroupName]="questionIndex">
             <mat-form-field appearance="fill" class="w-100">
@@ -51,7 +51,7 @@
                   let a of q.get('answers')['controls'];
                   let answerIndex = index
                 "
-                 class="border p-3 mt-2"
+                 class="border p-3 mt-2 bg-success"
               >
                 <!-- The repeated alias template -->
                 <div [formGroupName]="answerIndex">
@@ -70,7 +70,7 @@
                         let w of a.get('why')['controls'];
                         let whyIndex = index
                       "
-                      class="border p-3 mt-2"
+                      class="border p-3 mt-2 bg-secondary"
                     >
                       <!-- The repeated alias template -->
                       <div [formGroupName]="whyIndex">

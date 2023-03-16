@@ -4,6 +4,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 import { MatInputModule } from '@angular/material/input';
 
@@ -16,6 +18,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
 import { ActivatedRouteSnapshot, RouteReuseStrategy } from '@angular/router';
 import { HighlightPipe } from './pipes/highlight.pipe';
+import { QuestionsComponent } from './shared/questions/questions.component';
+import { AddParagraphComponent } from './components/add-paragraph/add-paragraph.component';
+import { TestFormComponent } from './components/test-form/test-form.component';
+import { TestComponent } from './components/test/test.component';
+
 
 export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
@@ -41,8 +48,12 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     DatePickerComponent,
     ParagraphComponent,
     HighlightPipe,
+    QuestionsComponent,
+    AddParagraphComponent,
+    TestFormComponent,
+    TestComponent,
   ],
- /*  entryComponents: [DialogAnswerComponent], */
+  /*  entryComponents: [DialogAnswerComponent], */
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -55,6 +66,8 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    MatCardModule,
+    MatIconModule,
   ],
   providers: [
     ///to change view in navigation link change

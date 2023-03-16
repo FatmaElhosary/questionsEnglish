@@ -1,0 +1,120 @@
+<section class="my-4">
+  <div class="container">
+    <h3>Add New Question:</h3>
+    <form class="add-lessons-form" [formGroup]="questionForm">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Question Number</mat-label>
+        <input matInput formControlName="qNumber" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Button Answer</mat-label>
+        <input matInput formControlName="btn_answer" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Paragraph</mat-label>
+        <textarea
+          matInput
+          placeholder=""
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          formControlName="paragraph"
+        ></textarea>
+      </mat-form-field>
+
+      <!--//////////////////////     questions///////////////////////////// -->
+      <div formArrayName="questions" >
+        <h2>questions</h2>
+        <button type="button" (click)="addQuestion()">
+          + Add question
+        </button>
+
+        <div *ngFor="let q of questions.controls; let questionIndex = index" class="border p-3 mt-2">
+          <!-- The repeated alias template -->
+          <div [formGroupName]="questionIndex">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Question</mat-label>
+              <input matInput formControlName="question" />
+            </mat-form-field>
+            <!--  <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Answer</mat-label>
+            <input matInput formControlName="answer" />
+          </mat-form-field>  -->
+
+            <!--        /////////////////// start Answer ///////////////////////       -->
+            <div formArrayName="answers">
+              <h2>answers</h2>
+              <button type="button" (click)="addNewAnswer(q.get('answers'))">
+                + Add  answer
+              </button>
+              <div
+                *ngFor="
+                  let a of q.get('answers')['controls'];
+                  let answerIndex = index
+                "
+                 class="border p-3 mt-2"
+              >
+                <!-- The repeated alias template -->
+                <div [formGroupName]="answerIndex">
+                  <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Answer</mat-label>
+                    <input matInput formControlName="answer" />
+                  </mat-form-field>
+                  <!---------------------------////why //////////////////////////-->
+                  <div formArrayName="why">
+                    <h2>KeyWords</h2>
+                    <button type="button" (click)="addNewWhy(a.get('why'))">
+                      + Add another KeyWord
+                    </button>
+                    <div
+                      *ngFor="
+                        let w of a.get('why')['controls'];
+                        let whyIndex = index
+                      "
+                      class="border p-3 mt-2"
+                    >
+                      <!-- The repeated alias template -->
+                      <div [formGroupName]="whyIndex">
+                        <mat-form-field appearance="fill" class="w-100">
+                          <mat-label>KeyWord</mat-label>
+                          <input matInput formControlName="key" />
+                        </mat-form-field>
+
+                        <mat-icon
+                          class="delete-btn"
+                          (click)="deleteWhy(a.get('why'), whyIndex)"
+                        >
+                          delete</mat-icon
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!------------------------------------- End why //////////////////////////-->
+                  <mat-icon
+                    class="delete-btn"
+                    (click)="deleteAnswer(q.get('answers'), answerIndex)"
+                  >
+                    delete</mat-icon
+                  >
+                </div>
+              </div>
+            </div>
+            <!--        /////////////////// End Answer ///////////////////////       -->
+            <mat-icon
+              class="delete-btn"
+              (click)="deleteQuestion(questionIndex)"
+            >
+              delete</mat-icon
+            >
+          </div>
+        </div>
+      </div>
+
+      <button (click)="addParagraph()" class="d-block mt-5 w-100">
+        Add Paragraph
+      </button>
+    </form>
+  </div>
+</section>
+
+{{ this.questionForm.value | json }}

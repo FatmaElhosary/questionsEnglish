@@ -1,4 +1,143 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import '././app/SCSS/variables';
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "DIN Next LT W23";
+}
+
+@font-face {
+  font-family: "DIN-l";
+  src: url("./assets/Fonts/DIN\ NEXT™\ ARABIC\ REGULAR.otf");
+}
+@font-face {
+  font-family: "DIN-m";
+  src: url("./assets/Fonts/DIN\ NEXT™\ ARABIC\ MEDIUM\ .otf");
+}
+@font-face {
+  font-family: "DIN-b";
+  src: url("./assets/Fonts/DIN\ NEXT™\ ARABIC\ BOLD.otf");
+}
+
+/* ngx pagination */
+
+.ngx-pagination {
+  padding-left: 0px !important;
+}
+
+.ngx-pagination .current {
+  background: $blue !important;
+  border: transparent !important;
+  border-radius: 20px !important;
+  /*  padding: 20px; */
+}
+#pagination2 .ngx-pagination li:not(.pagination-previous):not(.pagination-next){
+  display: none !important;
+}
+.ngx-pagination li {
+  font-family: "DIN-m";
+  font-size: 15pt;
+  color: $white;
+  border-radius: 30px !important;
+  background: $Orange;
+  margin: 0.6rem;
+}
+.ngx-pagination li a:hover {
+   background-color:transparent !important;
+}
+.ngx-pagination::after {
+  clear: both !important;
+}
+
+.ngx-pagination li span,
+.ngx-pagination li a {
+  /*  background: transparent !important; */
+  border-radius: 20px !important;
+  border: transparent !important;
+}
+
+/* #pagination1 .pagination-next,
+#pagination1 .pagination-previous {
+  display: none !important;
+} */
+.ngx-pagination .pagination-next ,
+.ngx-pagination .pagination-previous {
+  border-radius: 12px;
+  background-color: $blue !important;
+  color: $white !important;
+  /* padding: 1rem 1rem !important; */
+}
+ .ngx-pagination .pagination-next{
+float: right !important;
+}
+ .ngx-pagination .pagination-next::after{
+  clear: both;
+ }
+.ngx-pagination  .disabled  {
+  /* padding: .5rem .5rem !important; */
+  color: $blue !important;
+  cursor: default;
+  background-color: $gray !important;
+ padding: 1rem 1rem !important;
+}
+
+.ngx-pagination .pagination-next:hover{
+  background: transparent;
+}
+//remove >> <<///////////////
+.ngx-pagination .pagination-next a:after,
+.ngx-pagination .pagination-next.disabled:after {
+  content: "" !important;
+  display: inline-block;
+  margin-left: 0rem !important;
+}
+.ngx-pagination .pagination-previous a:before,
+.ngx-pagination .pagination-previous.disabled:before {
+  content: "" !important;
+  display: inline-block;
+  margin-right: 0rem !important;
+}
+
+
+.ngx-pagination .pagination-previous a,
+.ngx-pagination .pagination-previous  .disabled,
+.ngx-pagination .pagination-previous,
+.ngx-pagination .pagination-next a,
+.ngx-pagination .pagination-next .disabled ,
+.ngx-pagination .pagination-next{
+     padding: .5rem .5rem !important;
+    border-radius: 12px !important;
+}
+ .ngx-pagination a:focus, .ngx-pagination button:focus {
+    outline: none;
+
+}
+/* .ngx-pagination .disabled:hover {
+  background: transparent !important;
+} */
+//////////////////////////
+
+@media screen and (max-width: 601px) {
+  .ngx-pagination.responsive .small-screen {
+     display: none !important;
+   /*  display: inline-block !important;
+     color: $blue !important;
+    background-color: rgb(248, 248, 248) !important;
+    border: 2px solid #8b8b8b !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 9% !important; */
+  }
+  .responsive{
+    display: flex;
+    flex-direction: row;
+  }
+  .ngx-pagination.responsive
+    li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+    display: none !important;
+  }
+
+}

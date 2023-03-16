@@ -1,0 +1,29 @@
+     <h1 class="mt-2">Questions:</h1>
+      <div
+        class="questions"
+        *ngFor="
+          let question of questions
+            | paginate
+              : {
+                  id: 'pagination1',
+                  itemsPerPage: 1,
+                  currentPage: questionPage
+                };
+          let i = index
+        "
+      >
+        <h2>{{ question.question }}</h2>
+        <button (click)="showAnswer()">Show Suggestion</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          id="pagination1"
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onPaginateQuestion($event)"
+        >
+        </pagination-controls>
+      </div>
+      <div class="suggest w-100 h-20 bg-light">
+        <p>{{ answer }}</p>
+      </div>

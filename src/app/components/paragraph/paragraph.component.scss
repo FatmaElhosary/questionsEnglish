@@ -1,3 +1,66 @@
+@import "../../SCSS/_variables.scss";
+
 :host ::ng-deep .highlightText {
-    background: yellow;
+  background: $Orange;
+  padding: 0.2rem;
+}
+
+.paragraphs {
+  position: relative;
+  border: 1px solid $gray;
+  border-radius: 50px;
+  padding: 2rem 3rem;
+  .paragraph {
+    font-family: "DIN-r";
+    font-size: 15pt;
+    line-height: 2rem;
+    color: $black;
+  }
+  h1 {
+    font-family: "DIN-b";
+    color: $Orange;
+  }
+  .question {
+    font-family: "DIN-b";
+    color: $blue;
+    font-size: 23px;
+  }
+  .btn-answer {
+    font-family: "DIN-b";
+    color: $white;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 14px;
+    background: $blue;
+    margin-top: 0.2rem;
+    margin-right: 0.2rem;
+    text-transform: capitalize;
+  }
+  .overlay-btn {
+    background: $Orange;
+    border: none;
+    border-radius: 14px;
+    margin-bottom: 2rem;
+    display: inline-block;
+    /*   padding-top: 0.3rem;
+    padding-right: 0.3rem; */
+  }
+  .overlay-answer {
+    /* margin-bottom: 2rem; */
+    background: $blue;
+    border-radius: 34px;
+    padding-top: 0.3rem;
+  }
+  .suggest {
+    padding: 1.5rem 2rem;
+    background: $gray;
+    border-radius: 34px;
+    p {
+      /*  margin: 2rem; */
+      margin: 0 !important;
+      color: $blue;
+      font-family: "DIN-m";
+      font-size: 20px;
+    }
+  }
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EnglishService } from '../../services/english.service';
-//import { MatPaginator } from '@angular/material/paginator';
 
 //random answer
 let randomArrayElement = require('@smakss/random-array-element');
@@ -13,118 +11,94 @@ let randomArrayElement = require('@smakss/random-array-element');
   styleUrls: ['./paragraph.component.scss'],
 })
 export class ParagraphComponent implements OnInit {
-  //paragraph
-  paragraph: any;
   paragraphs: any;
-  questions: any;
-  paraId: number ;
-  doHighlight:boolean=false;
-  /*  answers: any[] = []; */
+  doHighlight: boolean = false;
   answer: string = '';
-  query: string[] = [];
+  keywords: any[] = [];
   ///question index///////////
   questinID: number = 0;
+  paraId: number = 0;
+  answerId: number = 0;
   //pagination
   //itemsPerPage
-  page: number = 1;
+  questionPage: number = 1;
+  paragraphPage: number = 1;
+
   //count: number = 0;
   tableSize: number = 1;
   /* tableSizes: any = [3, 6, 9, 12]; */
   //random array
   chooser: any;
   subscribtion: Subscription;
-  constructor(
-    private _EnglishService: EnglishService,
-    private activeRouter: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private _EnglishService: EnglishService) {}
 
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit(): void {
-    this.subscribtion = this.activeRouter.params.subscribe((paramsId) => {
-      this.paraId = paramsId['id'];
-      console.log(this.paraId);
-    });
     this.getAllParagraphs();
   }
   getAllParagraphs() {
-    this._EnglishService.getAllParagraph().subscribe((data) => {
-      console.log(data.data);
-      this.paragraphs = data.data;
-      this.getParagraph(+this.paraId);
-    });
-  }
-  getParagraph(paragId: any) {
-    this.paragraph = this.paragraphs.filter(
-      (paragraph) => paragraph.id == paragId
-    )[0];
-    //this.answers = this.paragraph.questions[this.questinID].answers;
-    this.changeQuestion();
-    ///add paginator source
-    this.questions = this.paragraph.questions;
-
-    //console.log(this.questions);
-  }
-  changeQuestion() {
-    console.log(this.questinID);
-    const answers = this.paragraph.questions[this.questinID].answers;
-    console.log(answers);
-    this.chooser = randomArrayElement(answers);
-  }
-  ///for paragraph/////////////////////
-  goToPre() {
-    if (+this.paraId > 1)
-      this.router.navigateByUrl(`/paragraphs/${+this.paraId - 1}`);
-    else {
-      this.router.navigateByUrl(`/paragraphs/1`);
-    }
-  }
-  goToNext() {
-    if (+this.paraId < this.paragraphs.length)
-      this.router.navigate(['/paragraphs', +this.paraId + 1]);
+    this.subscribtion = this._EnglishService.getAllParagraph().subscribe(
+      (data) => {
+        console.log(data.data);
+        this.paragraphs = data.data;
+        //////random array elements////////////////////
+        this.chooser = randomArrayElement(
+          this.paragraphs[this.paraId].questions[this.questinID].answers
+        );
+      },
+      (error) => console.log(error)
+    );
   }
   ////////////////////////////////////////
   showAnswer() {
-    this.query = this.paragraph.questions[this.questinID].why;
-    this.doHighlight=true;
-   // this.highlight();
+    /////////////////get random answer//////////////////
     this.answer = this.chooser().answer;
+    /////////get keywords of this answer////////////////////////
+    let answerIndex = this.paragraphs[this.paraId].questions[
+      this.questinID
+    ].answers.findIndex((ans) => ans.answer === this.answer);
+    this.keywords =
+      this.paragraphs[this.paraId].questions[this.questinID].answers[
+        answerIndex
+      ].why;
+      ////////////////////
+    console.log(this.keywords);
+    ////////highlight paragraph////////////////////
+    this.doHighlight = true;
   }
 
-  onPaginate(event: any) {
-    // console.log('event', event);
+  onPaginateQuestion(event: any) {
     this.doHighlight = false;
     this.answer = '';
-    this.query = [];
-    this.page = event;
-    this.getParagraph(+this.paraId);
+    this.questionPage = event;
     this.questinID = Number(event) - 1;
     this.changeQuestion();
   }
-  ///highlight paragraph //////////////////////
- /*  public highlight() {
-    //this.query = this.paragraph.questions[this.questinID].why;
-    console.log(this.query);
+  onPaginateParagraph(event) {
+    this.doHighlight = false;
+    this.answer = '';
+    //active first question
+    this.questionPage = 1;
+    //start from question 1
+    this.questinID = 0;
+    //
+    this.paragraphPage = event;
 
-    if (!this.query) {
-      return this.paragraph.paragraph;
-    }
-    return this.paragraph.paragraph.replace(
-      new RegExp(this.query.join('|'), 'gi'),
-      (match: string) => {
-        return '<span class="highlightText">' + match + '</span>';
-      }
-    );
-  } */
+    this.paraId = Number(event) - 1;
+    this.changeQuestion();
+  }
+  //////////////////get current question answers/////////////////////
+  changeQuestion() {
+    ///////////////////////get answers/////////////////////////////////
+    const currentParagraph = this.paragraphs[this.paragraphPage - 1];
+    console.log('currentParagraph', currentParagraph);
+    const currentQuestion = currentParagraph.questions[this.questinID];
+    console.log(currentQuestion);
+    //////////////////////////////////////////////////////////////
+    this.chooser = randomArrayElement(currentQuestion.answers);
+  }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.subscribtion.unsubscribe();
   }
-  /*   onTableSizeChange(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.getParagraph(+this.paraId);
-    this.changeQuestion();
-  } */
 }

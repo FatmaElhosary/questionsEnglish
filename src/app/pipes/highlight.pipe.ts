@@ -15,6 +15,6 @@ export class HighlightPipe implements PipeTransform {
       return '<span class="highlightText">' + match + '</span>';
 
     });
-    return null;
+   // return null;
   }
 }

@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,8 +21,13 @@ import { ActivatedRouteSnapshot, RouteReuseStrategy } from '@angular/router';
 import { HighlightPipe } from './pipes/highlight.pipe';
 import { QuestionsComponent } from './shared/questions/questions.component';
 import { AddParagraphComponent } from './components/add-paragraph/add-paragraph.component';
-import { TestFormComponent } from './components/test-form/test-form.component';
 import { TestComponent } from './components/test/test.component';
+import { ParagraphListComponent } from './components/paragraph-list/paragraph-list.component';
+import { ParagraphDetailsComponent } from './components/paragraph-details/paragraph-details.component';
+import { MatButtonModule } from '@angular/material/button';
+import { UpdateParagraphComponent } from './components/update-paragraph/update-paragraph.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 export class CustomRouteReuseStrategy implements RouteReuseStrategy {
@@ -50,8 +56,12 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     HighlightPipe,
     QuestionsComponent,
     AddParagraphComponent,
-    TestFormComponent,
     TestComponent,
+    ParagraphListComponent,
+    ParagraphDetailsComponent,
+    UpdateParagraphComponent,
+    NavBarComponent,
+    SpinnerComponent,
   ],
   /*  entryComponents: [DialogAnswerComponent], */
   imports: [
@@ -68,6 +78,8 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     NgxPaginationModule,
     MatCardModule,
     MatIconModule,
+    MatGridListModule,
+    MatButtonModule,
   ],
   providers: [
     ///to change view in navigation link change

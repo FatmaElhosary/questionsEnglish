@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EnglishService } from '../../services/english.service';
+import { ActivatedRoute } from '@angular/router';
 
 //random answer
 let randomArrayElement = require('@smakss/random-array-element');
@@ -30,22 +31,41 @@ export class ParagraphComponent implements OnInit {
   //random array
   chooser: any;
   subscribtion: Subscription;
-  constructor(private _EnglishService: EnglishService) {}
+  constructor(private _EnglishService: EnglishService,private ActivatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+
     this.getAllParagraphs();
   }
+
+
+
+
   getAllParagraphs() {
-    this.subscribtion = this._EnglishService.getAllParagraph().subscribe(
-      (data) => {
-        console.log(data.data);
-        this.paragraphs = data.data;
+    this.subscribtion = this._EnglishService.getAll().subscribe(
+     /*    (data) => {
+        console.log(data.paragraphData);
+        this.paragraphs = data.paragraphData;
         //////random array elements////////////////////
         this.chooser = randomArrayElement(
           this.paragraphs[this.paraId].questions[this.questinID].answers
         );
       },
-      (error) => console.log(error)
+      (error) => console.log(error) */
+      {
+        next: (res) => {
+          console.log(res.paragraphData);
+          this.paragraphs = res.paragraphData;
+          //////random array elements////////////////////
+          this.chooser = randomArrayElement(
+            this.paragraphs[this.paraId].questions[this.questinID].answers?this.paragraphs[this.paraId].questions[this.questinID].answers:[]
+          );
+        },
+        error: (err: any) => {console.log(err);},
+        complete: () => {
+
+        },
+      }
     );
   }
   ////////////////////////////////////////
@@ -56,10 +76,18 @@ export class ParagraphComponent implements OnInit {
     let answerIndex = this.paragraphs[this.paraId].questions[
       this.questinID
     ].answers.findIndex((ans) => ans.answer === this.answer);
-    this.keywords =
+
+    /////array of why object ////////////
+    let keywordsObject =
       this.paragraphs[this.paraId].questions[this.questinID].answers[
         answerIndex
       ].why;
+////////////////////////convert array of object to array of string//////////////////////
+     this.keywords = keywordsObject.map(function (item) {
+       return item['key'];
+     });
+
+
       ////////////////////
     console.log(this.keywords);
     ////////highlight paragraph////////////////////
@@ -94,7 +122,8 @@ export class ParagraphComponent implements OnInit {
     const currentQuestion = currentParagraph.questions[this.questinID];
     console.log(currentQuestion);
     //////////////////////////////////////////////////////////////
-    this.chooser = randomArrayElement(currentQuestion.answers);
+     if (currentQuestion)
+       this.chooser = randomArrayElement(currentQuestion.answers);
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

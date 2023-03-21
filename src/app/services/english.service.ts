@@ -5,23 +5,129 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EnglishService {
-  questions:any;
+  URL: string = 'http://localhost:3000/paragraph';
+  questions: any;
   constructor(private _http: HttpClient) {
-    this.getAllParagraph().subscribe(res=>{
-      this.questions=res.data;
-    })
+    this.getAllParagraph().subscribe((res) => {
+      this.questions = res.data;
+    });
   }
-
+  ////////////////////////////////////API//////////////////////////////////////////
   getAllParagraph(): Observable<any> {
-   return this._http.get('../../assets/english.json');
+    return this._http.get('../../assets/english.json');
+  }
+  ////////////////////////////////////////////
+  getAll(): Observable<any> {
+    return this._http.get(this.URL);
+  }
+  /////////////////////////////////////////////////
+  /////////////////////get one paragraph by id////////////////////////////////
+  getParagraph(id: string): Observable<any> {
+    return this._http.get(`${this.URL}/${id}`);
+  }
+  ////////////////////////////add new paragraph///////////////////////////////////////////
+  addParagraph(paragraph): Observable<any> {
+    return this._http.post(this.URL, paragraph);
   }
 
-
-  getParagraph(id:number):Observable<any>{
-    return this._http.get(`../../assets/english.json/${id}`);
+  ///Delete//////////
+  deletePAragraph(id: string): Observable<any> {
+    return this._http.delete(`${this.URL}/${id}`);
   }
 
-  addParagraph(paragraph):Observable<any>{
-    return this._http.post('http://localhost:3000/paragraph',paragraph);
+  ///update paragraph//////
+  updateParagraph(id: string, paragraph: any): Observable<any> {
+    return this._http.put(`${this.URL}/${id}`, paragraph);
+  }
+
+  usersList: any = [
+    {
+      id: 1,
+      name: 'Leanne Graham',
+      username: 'Bret',
+      email: 'Sincere@april.biz',
+      address: {
+        street: 'Kulas Light',
+        suite: 'Apt. 556',
+        city: 'Gwenborough',
+        zipcode: '92998-3874',
+        geo: {
+          lat: '-37.3159',
+          lng: '81.1496',
+        },
+      },
+      phone: '1-770-736-8031 x56442',
+      website: 'hildegard.org',
+      company: {
+        name: 'Romaguera-Crona',
+        catchPhrase: 'Multi-layered client-server neural-net',
+        bs: 'harness real-time e-markets',
+      },
+      cars: [
+        { name: 'Ford', models: 'Fiesta' },
+        { name: 'BMW', models: 'X1' },
+        { name: 'Fiat', models: '100' },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Ervin Howell',
+      username: 'Antonette',
+      email: 'Shanna@melissa.tv',
+      address: {
+        street: 'Victor Plains',
+        suite: 'Suite 879',
+        city: 'Wisokyburgh',
+        zipcode: '90566-7771',
+        geo: {
+          lat: '-43.9509',
+          lng: '-34.4618',
+        },
+      },
+      phone: '010-692-6593 x09125',
+      website: 'anastasia.net',
+      company: {
+        name: 'Deckow-Crist',
+        catchPhrase: 'Proactive didactic contingency',
+        bs: 'synergize scalable supply-chains',
+      },
+      cars: [
+        { name: 'Ford', models: 'Fiesta' },
+        { name: 'BMW', models: 'X2' },
+        { name: 'Fiat', models: '200' },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Clementine Bauch',
+      username: 'Samantha',
+      email: 'Nathan@yesenia.net',
+      address: {
+        street: 'Douglas Extension',
+        suite: 'Suite 847',
+        city: 'McKenziehaven',
+        zipcode: '59590-4157',
+        geo: {
+          lat: '-68.6102',
+          lng: '-47.0653',
+        },
+      },
+      phone: '1-463-123-4447',
+      website: 'ramiro.info',
+      company: {
+        name: 'Romaguera-Jacobson',
+        catchPhrase: 'Face to face bifurcated interface',
+        bs: 'e-enable strategic applications',
+      },
+      cars: [
+        { name: 'Ford', models: 'Fiesta' },
+        { name: 'BMW', models: 'X3' },
+        { name: 'Fiat', models: '300' },
+      ],
+    },
+  ];
+
+  fetchUsersList() {
+    return [...this.usersList];
   }
 }

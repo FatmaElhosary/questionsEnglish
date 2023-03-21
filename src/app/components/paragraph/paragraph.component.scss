@@ -6,6 +6,10 @@
 }
 
 .paragraphs {
+  a {
+    text-decoration: none !important;
+    color: $white !important;
+  }
   position: relative;
   border: 1px solid $gray;
   border-radius: 50px;
@@ -15,6 +19,7 @@
     font-size: 15pt;
     line-height: 2rem;
     color: $black;
+    word-wrap: break-word;
   }
   h1 {
     font-family: "DIN-b";

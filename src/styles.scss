@@ -26,6 +26,10 @@ body {
 /* ngx pagination */
 
 .ngx-pagination {
+    a{
+    text-decoration: none !important;
+    color: $white !important;
+  }
   padding-left: 0px !important;
 }
 
@@ -60,10 +64,7 @@ body {
   border: transparent !important;
 }
 
-/* #pagination1 .pagination-next,
-#pagination1 .pagination-previous {
-  display: none !important;
-} */
+
 .ngx-pagination .pagination-next ,
 .ngx-pagination .pagination-previous {
   border-radius: 12px;
@@ -116,9 +117,7 @@ float: right !important;
     outline: none;
 
 }
-/* .ngx-pagination .disabled:hover {
-  background: transparent !important;
-} */
+
 //////////////////////////
 
 @media screen and (max-width: 601px) {
@@ -140,4 +139,25 @@ float: right !important;
     display: none !important;
   }
 
+}
+
+
+
+/////////////loader/////////////
+///
+.spinner-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 998;
+    app-spinner {
+        width: 6rem;
+        height: 6rem;
+    }
 }

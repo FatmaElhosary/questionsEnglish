@@ -1,6 +1,5 @@
 <div class="container py-5 paragraphs mt-5">
   <div class="row">
-
     <!--   Start Paragraph////////////////////////////////////////////// -->
     <div
       *ngFor="
@@ -20,14 +19,13 @@
         class="paragraph"
         [innerHTML]="
           doHighlight == true
-            ? (paragraph['paragraph']
-              | highlight
-                : (keywords))
+            ? (paragraph['paragraph'] | highlight : keywords)
             : paragraph['paragraph']
         "
       ></p>
       <!-- <app-questions [questions]="paragraph.questions"></app-questions> -->
       <!--   <h1 class="mt-2">Questions:</h1> -->
+      <div >
       <div
         class="questions"
         *ngFor="
@@ -40,6 +38,7 @@
                 };
           let i = index
         "
+
       >
         <h2 class="question">{{ question.question }}</h2>
 
@@ -54,13 +53,16 @@
           >
           </pagination-controls>
         </div>
-        <div class="overlay-btn">
+        <div
+          class="overlay-btn"
+          *ngIf="question.answers && question.answers != []"
+        >
           <button (click)="showAnswer()" class="btn-answer">
             {{ paragraph.btn_answer }}
           </button>
         </div>
       </div>
-
+</div>
       <div class="overlay-answer">
         <div class="suggest">
           <p>{{ answer }}</p>
@@ -85,4 +87,3 @@
     </div>
   </div>
 </div>
-

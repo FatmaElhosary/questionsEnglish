@@ -1,0 +1,38 @@
+<section class="container">
+  <h1>All Paragraphs</h1>
+  <div *ngFor="let paragraph of paragraphs let i= index" class="py-2">
+    <mat-card class="paragraph-card mt-2">
+      <mat-card-header>
+        <!--  <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ paragraph["qNumber"] }}</p>
+        <p>{{ paragraph["paragraph"] }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+         routerLink="/paragraph/{{ paragraph['_id'] }}"
+        >
+          See More
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          routerLink="/paragraph/update/{{ paragraph['_id'] }}"
+        >
+          Update
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="deleteParagraph(paragraph['_id'])"
+        >
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</section>

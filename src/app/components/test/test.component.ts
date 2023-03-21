@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { EnglishService } from '../../services/english.service';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-test',
@@ -7,74 +14,68 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent implements OnInit {
-  empForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
-
+  constructor(
+    private EnglishService: EnglishService,
+    private fb: FormBuilder
+  ) {}
+  userForm: FormGroup;
+  userData: any;
+  get usersArray() {
+    return <FormArray>this.userForm.get('users');
+  }
   ngOnInit() {
-    this.empForm = this.fb.group({
-      employees: this.fb.array([]),
+    this.userForm = this.fb.group({
+      users: this.fb.array([]),
     });
+    this.userData = this.EnglishService.fetchUsersList();
+    this.displayUsers();
   }
-
-  employees(): FormArray {
-    return this.empForm.get('employees') as FormArray;
-  }
-
-  newEmployee(): FormGroup {
+  createCarFormGroup(car: any) {
     return this.fb.group({
-      firstName: '',
-      lastName: '',
-      skills: this.fb.array([]),
+      name: [car.name, [Validators.required]],
+      models: [car.models, [Validators.required]],
     });
   }
 
-  addEmployee() {
-    this.employees().push(this.newEmployee());
+  loadCarsArray(cars: any[]) {
+    let transformedCars = cars.map((car: any) => this.createCarFormGroup(car));
+    return transformedCars;
   }
 
-  removeEmployee(empIndex: number) {
-    this.employees().removeAt(empIndex);
-  }
-
-  employeeSkills(empIndex: number): FormArray {
-    return this.employees().at(empIndex).get('skills') as FormArray;
-  }
-
-  newSkill(): FormGroup {
+  createUserFormGroup(user: any) {
     return this.fb.group({
-      skill: '',
-      exp: this.fb.array([this.fb.control('')]),
+      id: [{ value: user.id, disabled: true }],
+      name: [user.name, [Validators.required]],
+      username: [user.username, [Validators.required]],
+      email: [user.email, [Validators.required, Validators.email]],
+      address: this.fb.group({
+        street: [user.address.street, [Validators.required]],
+        suite: [user.address.suite, [Validators.required]],
+        city: [user.address.city, [Validators.required]],
+        zipcode: [user.address.zipcode, [Validators.required]],
+        geo: this.fb.group({
+          lat: [user.address.geo.lat, [Validators.required]],
+          lng: [user.address.geo.lng, [Validators.required]],
+        }),
+      }),
+      phone: [user.phone, [Validators.required]],
+      website: [user.website, [Validators.required]],
+      company: this.fb.group({
+        name: [user.company.name, [Validators.required]],
+        catchPhrase: [user.company.catchPhrase, [Validators.required]],
+        bs: [user.company.bs, [Validators.required]],
+      }),
+      cars: this.fb.array(this.loadCarsArray(user.cars)),
     });
   }
-
-  addEmployeeSkill(empIndex: number) {
-    this.employeeSkills(empIndex).push(this.newSkill());
+  displayUsers() {
+    let transformedUsers = this.userData.map((user: any) =>
+      this.createUserFormGroup(user)
+    );
+    this.userForm.setControl('users', this.fb.array(transformedUsers));
   }
 
-  removeEmployeeSkill(empIndex: number, skillIndex: number) {
-    this.employeeSkills(empIndex).removeAt(skillIndex);
-  }
-  ////////////////////dkills experience//////////////////////////////
-  skillsex(empIndex: number, skillIndex: number): FormArray {
-    return <FormArray>this.employeeSkills(empIndex).at(skillIndex).get('exp');
-  }
-
- /*  newskillsex(): FormGroup {
-    return this.fb.group({
-      exp: this.fb.control(''),
-    });
-  } */
-
-  addskillsex(empIndex: number, skillIndex: number, exIndex:number) {
-    this.skillsex(empIndex, skillIndex).push(this.fb.control(''));
-  }
-
-  removeskillsex(empIndex: number, skillIndex: number, exIndex) {
-    this.skillsex(empIndex, skillIndex).removeAt(exIndex);
-  }
-  ///////////////////////////////////////////////////////////
-  onSubmit() {
-    console.log(this.empForm.value);
+  track(item: any, index: number) {
+    return index;
   }
 }

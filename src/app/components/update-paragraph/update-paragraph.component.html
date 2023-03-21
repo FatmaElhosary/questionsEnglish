@@ -1,8 +1,7 @@
 <section class="my-4">
-  <h1 class="d-flex align-items-center justify-content-center text-bold mt-2">
-    Add New Question:
-  </h1>
+    <h1 class="d-flex align-items-center justify-content-center text-bold mt-2">Update Question:</h1>
   <div class="container d-flex align-items-center justify-content-center">
+
     <form class="add-lessons-form" [formGroup]="questionForm">
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Question Number</mat-label>
@@ -23,9 +22,7 @@
         ></textarea>
       </mat-form-field>
       <div *ngIf="f['paragraph'].errors" class="invalid-feedback">
-        <div *ngIf="f['paragraph'].errors['required']">
-          Paragraph is required
-        </div>
+        <div *ngIf="f['paragraph'].errors['required']">Paragraph is required</div>
       </div>
 
       <!--//////////////////////     questions///////////////////////////// -->
@@ -43,11 +40,6 @@
               <mat-label>Question</mat-label>
               <input matInput formControlName="question" />
             </mat-form-field>
-            <!--  <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Answer</mat-label>
-            <input matInput formControlName="answer" />
-          </mat-form-field>  -->
-
             <!--        /////////////////// start Answer ///////////////////////       -->
             <div formArrayName="answers">
               <h2>answers</h2>
@@ -118,18 +110,11 @@
         </div>
       </div>
 
-      <button
-        mat-raised-button
-        color="accent"
-        (click)="addParagraph()"
-        class="d-block my-5 w-100"
-      >
-        Add Paragraph
+      <button (click)="UpdateParagraph()" class="d-block my-5 w-100">
+        Update Paragraph
       </button>
     </form>
   </div>
 </section>
-<div class="spinner-wrapper" *ngIf="loading">
-  <app-spinner></app-spinner>
-</div>
-<!-- {{ this.questionForm.value | json }} -->
+
+{{ this.questionForm.value|json }}

@@ -1,68 +1,103 @@
-<h1>Angular Nested FormArray / Dynamic FormArray</h1>
-
-<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
-  <div formArrayName="employees">
-    <div *ngFor="let employee of employees().controls; let empIndex=index">
-      <div
-        [formGroupName]="empIndex"
-        style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;"
-      >
-        {{empIndex}} First Name :
-        <input type="text" formControlName="firstName" />
-        Last Name:
-        <input type="text" formControlName="lastName" />
-
-        <button (click)="removeEmployee(empIndex)">Remove</button>
-
-        <div formArrayName="skills">
-          <div
-            *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index"
-          >
-            <div [formGroupName]="skillIndex">
-              {{skillIndex}} Skill :
-              <input type="text" formControlName="skill" />
-             <!--  Exp:
-              <input type="text" formControlName="exp" /> -->
-              <div formArrayName="exp">
-                <div
-                  *ngFor="let ex of skillsex(empIndex,skillIndex).controls; let exIndex=index"
-                >
-                  <div [formGroupName]="exIndex">
-                    {{exIndex}} Exp :
-                    <input type="text" formControlName="exp" />
-                    <button type="button" (click)="addskillsex(empIndex,skillIndex,exIndex)">
-                      Add EX
-                    </button>
-                    <button (click)="removeskillsex(empIndex,skillIndex,exIndex)">
-                      Remove
-                    </button>
-
-                  </div>
-
-                </div>
-              </div>
-
-              <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
-                Remove
-              </button>
-
-            </div>
-          </div>
-        </div>
-
-        <button type="button" (click)="addEmployeeSkill(empIndex)">
-          Add Skill
-        </button>
-      </div>
+<div class="container">
+  <!-- <form [formGroup]="userForm" novalidate>
+    <div formArrayName="users">
+      <table class="table table-bordered">
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>USERNAME</th>
+          <th>EMAIL</th>
+          <th>STREET</th>
+          <th>SUITE</th>
+          <th>CITY</th>
+          <th>ZIPCODE</th>
+          <th>LAT</th>
+          <th>LNG</th>
+          <th>PHONE</th>
+          <th>WEBSITE</th>
+          <th>COMPANY NAME</th>
+          <th>COMPANY CATCHPHRASE</th>
+          <th>COMPANY BS</th>
+          <th colspan="2">CARS OWNED</th>
+        </tr>
+        <tr
+          *ngFor="let x of usersArray.controls; let i = index; "
+          [formGroupName]="i"
+        >
+          <td>
+            <input type="text" formControlName="id" />
+          </td>
+          <td>
+            <input type="text" formControlName="name" />
+          </td>
+          <td>
+            <input type="text" formControlName="username" />
+          </td>
+          <td>
+            <input type="text" formControlName="email" />
+          </td>
+          <ng-container formGroupName="address">
+            <td>
+              <input type="text" formControlName="street" />
+            </td>
+            <td>
+              <input type="text" formControlName="suite" />
+            </td>
+            <td>
+              <input type="text" formControlName="city" />
+            </td>
+            <td>
+              <input type="text" formControlName="zipcode" />
+            </td>
+            <ng-container formGroupName="geo">
+              <td>
+                <input type="text" formControlName="lat" />
+              </td>
+              <td>
+                <input type="text" formControlName="lng" />
+              </td>
+            </ng-container>
+          </ng-container>
+          <td>
+            <input type="text" formControlName="phone" />
+          </td>
+          <td>
+            <input type="text" formControlName="website" />
+          </td>
+          <ng-container formGroupName="company">
+            <td>
+              <input type="text" formControlName="name" />
+            </td>
+            <td>
+              <input type="text" formControlName="catchPhrase" />
+            </td>
+            <td>
+              <input type="text" formControlName="bs" />
+            </td>
+          </ng-container>
+          <ng-container formArrayName="cars">
+            <ng-container
+              *ngFor="
+                let y of x.get('cars').controls;
+                let j = index;
+                trackBy: track
+              "
+              [formGroupName]="j"
+            >
+              <td>
+                <label>
+                  <b>Car Name:</b>
+                  <input type="text" formControlName="name" />
+                  <b>Model:</b>
+                  <input type="text" formControlName="models" />
+                </label>
+              </td>
+            </ng-container>
+          </ng-container>
+        </tr>
+      </table>
     </div>
-    <button type="button" (click)="addEmployee()">Add Employee</button>
-  </div>
-</form>
-
-{{this.empForm.value | json}}
-
-<br /><br />
-<a
-  href="https://www.tektutorialshub.com/angular/nested-formarray-example-add-form-fields-dynamically/"
-  >Nested FormArray / Dynamic FormArray</a
->
+  </form>
+ -->
+  <b>Form's Value:</b> {{ userForm.value | json }}
+</div>

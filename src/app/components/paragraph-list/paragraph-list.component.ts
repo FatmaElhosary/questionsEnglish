@@ -21,7 +21,9 @@ export class ParagraphListComponent implements OnInit {
         this.paragraphs = res.paragraphData;
         console.log(res.paragraphData);
       },
-      error: (err: any) => {},
+      error: (err: any) => {
+        alert('server error');
+      },
       complete: () => {},
     });
     this.subs.push(sub1);

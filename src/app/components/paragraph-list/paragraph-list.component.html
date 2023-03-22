@@ -1,4 +1,6 @@
-<section class="container">
+
+
+<section class="container" *ngIf="paragraphs;else other_content">
   <h1>All Paragraphs</h1>
   <div *ngFor="let paragraph of paragraphs let i= index" class="py-2">
     <mat-card class="paragraph-card mt-2">
@@ -36,3 +38,8 @@
     </mat-card>
   </div>
 </section>
+<ng-template #other_content>
+
+  <app-spinner></app-spinner>
+
+</ng-template>

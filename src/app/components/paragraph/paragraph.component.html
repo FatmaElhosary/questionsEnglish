@@ -1,3 +1,4 @@
+<section  *ngIf="paragraphs;else other_content">
 <div class="container py-5 paragraphs mt-5">
   <div class="row">
     <!--   Start Paragraph////////////////////////////////////////////// -->
@@ -87,3 +88,9 @@
     </div>
   </div>
 </div>
+</section>
+<ng-template #other_content>
+
+  <app-spinner></app-spinner>
+
+</ng-template>

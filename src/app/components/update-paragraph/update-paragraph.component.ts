@@ -39,27 +39,11 @@ export class UpdateParagraphComponent implements OnInit {
         this.paragraph.questions.map((question: any, index: number) => {
           const actorsForm = this.fb.group({
             question: question.question,
-            answers: this.fb.array([
-              this.fb.group({
-                answer: ['', Validators.required],
-                why: this.fb.array([
-                  this.fb.group({
-                    key: ['', Validators.required],
-                  }),
-                  this.fb.group({
-                    key: ['', Validators.required],
-                  }),
-                ]),
-              }),
-              this.fb.group({
-                answer: ['', Validators.required],
-                why: this.fb.array([
-                  this.fb.group({
-                    key:['', Validators.required],
-                  }),
-                ]),
-              }),
-            ]),
+            answers: this.fb.array(
+              question.answers.map((answer: any) =>
+                this.createAnswerFormGroup(answer)
+              )
+            ),
             /*  this.fb.array([
               this.fb.group({
                 answer: ['', Validators.required],
@@ -81,6 +65,30 @@ export class UpdateParagraphComponent implements OnInit {
       },
     });
   }
+  createAnswerFormGroup(answer: any) {
+    return this.fb.group({
+      answer: [answer.answer, Validators.required],
+      why: this.fb.array(
+        answer.why.map((wh: any) => this.createwhyFormGroup(wh))
+      ),
+    });
+  }
+  createwhyFormGroup(wh) {
+    return this.fb.group({
+      key: [wh.key, Validators.required],
+    });
+  }
+
+  /*    loadanswersArray(answers: any[]) {
+    console.log(answers);
+
+    let transformedCars =  answers.map((answer: any) =>
+      this.createAnswerFormGroup(answer)
+    );
+    console.log(transformedCars);
+
+    return transformedCars;
+  } */
   questionForm: FormGroup = this.fb.group({
     paragraph: ['', Validators.required],
     qNumber: ['', Validators.required],
@@ -175,7 +183,7 @@ export class UpdateParagraphComponent implements OnInit {
         },
       });
     } else {
-      //alert('');
+      alert('You Should fill all Required Inputs');
       console.log('You Should fill all Required Inputs');
     }
   }

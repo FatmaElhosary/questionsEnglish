@@ -61,7 +61,9 @@ export class ParagraphComponent implements OnInit {
             this.paragraphs[this.paraId].questions[this.questinID].answers?this.paragraphs[this.paraId].questions[this.questinID].answers:[]
           );
         },
-        error: (err: any) => {console.log(err);},
+        error: (err: any) => {
+          alert(err.message)
+          console.log(err.message);},
         complete: () => {
 
         },

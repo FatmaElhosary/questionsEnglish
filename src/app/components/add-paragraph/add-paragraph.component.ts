@@ -23,7 +23,7 @@ export class AddParagraphComponent implements OnInit {
     private _router: Router
   ) {}
   questionForm: FormGroup = this.fb.group({
-    paragraph: ['', Validators.required],
+    paragraph: '',
     qNumber: ['', Validators.required],
     btn_answer: ['Show Suggestion', Validators.required],
     questions: this.fb.array([]),
@@ -46,9 +46,8 @@ export class AddParagraphComponent implements OnInit {
         answers: this.fb.array([
           this.fb.group({
             answer: ['', Validators.required],
-            why: this.fb.array([
-              this.fb.group({ key: ['', Validators.required] }),
-            ]),
+            why: this.fb.array([]),
+            //this.fb.group({ key: ['', Validators.required] }),
           }),
         ]),
         /*    [
@@ -68,7 +67,7 @@ export class AddParagraphComponent implements OnInit {
     control.push(
       this.fb.group({
         answer: ['', Validators.required],
-        why: this.fb.array([this.fb.group({ key: ['', Validators.required] })]),
+        why: this.fb.array([]),
         //this.fb.group({ key: ['', Validators.required] })
       })
     );

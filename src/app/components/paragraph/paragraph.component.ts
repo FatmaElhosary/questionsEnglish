@@ -62,7 +62,7 @@ export class ParagraphComponent implements OnInit {
           );
         },
         error: (err: any) => {
-          alert(err.message)
+          //alert(err.message)
           console.log(err.message);},
         complete: () => {
 

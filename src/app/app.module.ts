@@ -21,7 +21,6 @@ import { ActivatedRouteSnapshot, RouteReuseStrategy } from '@angular/router';
 import { HighlightPipe } from './pipes/highlight.pipe';
 import { QuestionsComponent } from './shared/questions/questions.component';
 import { AddParagraphComponent } from './components/add-paragraph/add-paragraph.component';
-import { TestComponent } from './components/test/test.component';
 import { ParagraphListComponent } from './components/paragraph-list/paragraph-list.component';
 import { ParagraphDetailsComponent } from './components/paragraph-details/paragraph-details.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -56,7 +55,6 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     HighlightPipe,
     QuestionsComponent,
     AddParagraphComponent,
-    TestComponent,
     ParagraphListComponent,
     ParagraphDetailsComponent,
     UpdateParagraphComponent,

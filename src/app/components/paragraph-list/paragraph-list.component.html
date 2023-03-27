@@ -2,9 +2,12 @@
 
 <section class="container" *ngIf="paragraphs;else other_content">
   <h1>All Paragraphs</h1>
+   <button    mat-raised-button color="accent" class="export-btn mx-1"  (click)="export()">Export Project</button>
   <div *ngFor="let paragraph of paragraphs let i= index" class="py-2">
+<label for="{{ paragraph._id }}" id="">
     <mat-card class="paragraph-card mt-2">
       <mat-card-header>
+         <input type="checkbox" name="question"  [(ngModel)]="paragraph.isChecked" (change)="changeSelection()" id="{{ paragraph._id }}" >
         <!--  <mat-card-title>Shiba Inu</mat-card-title>
       <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       </mat-card-header>
@@ -36,10 +39,10 @@
         </button>
       </mat-card-actions>
     </mat-card>
+    </label>
   </div>
 </section>
 <ng-template #other_content>
-
-  <app-spinner></app-spinner>
-
+  <!-- <app-spinner></app-spinner> -->
+<h2>No Questions found</h2>
 </ng-template>

@@ -1,5 +1,6 @@
 
 .paragraph-card{
+position: relative;
   min-height: 2rem;
  cursor: pointer;
   p{
@@ -9,4 +10,9 @@
    overflow: hidden;
    text-overflow: ellipsis;
 }
+input,.export-btn{
+     position: absolute;
+    right: 12px;
+}
+
 }

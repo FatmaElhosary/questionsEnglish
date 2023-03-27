@@ -90,7 +90,7 @@ export class UpdateParagraphComponent implements OnInit {
     return transformedCars;
   } */
   questionForm: FormGroup = this.fb.group({
-    paragraph: ['', Validators.required],
+    paragraph: [''],
     qNumber: ['', Validators.required],
     btn_answer: ['Show Suggestion', Validators.required],
     questions: this.fb.array([]),

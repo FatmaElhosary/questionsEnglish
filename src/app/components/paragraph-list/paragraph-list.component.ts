@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnglishService } from '../../services/english.service';
 import { Subscription } from 'rxjs';
+import {Router } from '@angular/router';
 
 @Component({
   selector: 'app-paragraph-list',
@@ -9,8 +10,9 @@ import { Subscription } from 'rxjs';
 })
 export class ParagraphListComponent implements OnInit {
   paragraphs: any[];
+  selectedParagraphs: any[] = [];
   subs: Subscription[] = [];
-  constructor(private EnglishService: EnglishService) {}
+  constructor(private EnglishService: EnglishService,private router:Router) {}
 
   ngOnInit(): void {
     this.getAllParagraphs();
@@ -22,7 +24,9 @@ export class ParagraphListComponent implements OnInit {
         console.log(res.paragraphData);
       },
       error: (err: any) => {
-        alert('server error');
+        console.log(err.message);
+
+        //alert('server error');
       },
       complete: () => {},
     });
@@ -50,4 +54,36 @@ export class ParagraphListComponent implements OnInit {
     //Add 'implements OnDestroy' to the class.
     this.subs.forEach((sub) => sub.unsubscribe());
   }
+  // Selected item
+  fetchSelectedItems() {
+    this.selectedParagraphs = this.paragraphs.filter((value, index) => {
+      return value.isChecked;
+    });
+  }
+
+  export() {
+    console.log(this.selectedParagraphs);
+    if (this.selectedParagraphs.length != 0) {
+      this.EnglishService.exportProject(this.selectedParagraphs).subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err: any) => {
+          console.log(err.message);
+        },
+        complete: () => {
+
+          this.ngOnInit();
+        },
+      });
+    } else {
+      alert("you havn't selected any question to export");
+    }
+  }
+
+  changeSelection() {
+    this.fetchSelectedItems();
+  }
+
+
 }

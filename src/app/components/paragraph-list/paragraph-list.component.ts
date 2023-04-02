@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnglishService } from '../../services/english.service';
 import { Subscription } from 'rxjs';
-import {Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paragraph-list',
@@ -12,7 +12,7 @@ export class ParagraphListComponent implements OnInit {
   paragraphs: any[];
   selectedParagraphs: any[] = [];
   subs: Subscription[] = [];
-  constructor(private EnglishService: EnglishService,private router:Router) {}
+  constructor(private EnglishService: EnglishService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllParagraphs();
@@ -62,18 +62,37 @@ export class ParagraphListComponent implements OnInit {
   }
 
   export() {
-    console.log(this.selectedParagraphs);
+    let folderName='';
+    //console.log(this.selectedParagraphs);
     if (this.selectedParagraphs.length != 0) {
       this.EnglishService.exportProject(this.selectedParagraphs).subscribe({
         next: (res) => {
           console.log(res);
+          folderName=res.zipFolder;
         },
         error: (err: any) => {
           console.log(err.message);
         },
         complete: () => {
+           window.open(
+            `http://192.168.109.32:3000/paragraph/zip/folder/${folderName}`
+          );
 
-          this.ngOnInit();
+           this.ngOnInit();
+
+/*
+          this.EnglishService.getProgject(folderName).subscribe({
+            next: (res) => {
+              console.log(res);
+            },
+            error: (err: any) => {
+              console.log(err.message);
+            },
+            complete: () => {
+              console.log('finish');
+            },
+          });
+          this.ngOnInit(); */
         },
       });
     } else {
@@ -84,6 +103,4 @@ export class ParagraphListComponent implements OnInit {
   changeSelection() {
     this.fetchSelectedItems();
   }
-
-
 }

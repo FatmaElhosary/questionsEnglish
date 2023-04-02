@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EnglishService {
-  URL: string = 'http://localhost:3000/paragraph';
+  URL: string = 'http://192.168.109.32:3000/paragraph';
   questions: any;
   constructor(private _http: HttpClient) {
     this.getAllParagraph().subscribe((res) => {
@@ -41,6 +41,11 @@ export class EnglishService {
   }
   //////////////////////////////export project////////////////////////////////
   exportProject(paragraphs: any[]): Observable<any> {
-     return this._http.post(`${this.URL}/export`, paragraphs);
+    return this._http.post(`${this.URL}/export`, paragraphs);
+  }
+
+  getProgject(folderName){
+    return this._http.get(`${this.URL}/zip/folder/${folderName}`);
+
   }
 }

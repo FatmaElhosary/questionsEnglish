@@ -116,5 +116,7 @@
     </form>
   </div>
 </section>
-
-{{ this.questionForm.value|json }}
+<div class="spinner-wrapper" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+<!-- {{ this.questionForm.value|json }} -->

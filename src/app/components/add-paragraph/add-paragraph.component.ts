@@ -88,9 +88,10 @@ export class AddParagraphComponent implements OnInit {
   }
   /////////////////////////////////////////////////////////////////////////////////////////
   addParagraph() {
-    this.loading=true;
+
     // console.log(this.questionForm.value);
     if (this.questionForm.valid) {
+       this.loading = true;
       this._EnglishService.addParagraph(this.questionForm.value).subscribe({
         next: (res) => {
 
@@ -101,7 +102,6 @@ export class AddParagraphComponent implements OnInit {
         complete: () => {
           this.loading = false;
           this.questionForm.reset();
-
           this._router.navigate(['paragraphs/list']);
         },
       });

@@ -12,12 +12,14 @@ export class ParagraphListComponent implements OnInit {
   paragraphs: any[];
   selectedParagraphs: any[] = [];
   subs: Subscription[] = [];
+  loading: boolean = false;
   constructor(private EnglishService: EnglishService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllParagraphs();
   }
   getAllParagraphs() {
+    this.loading=true;
     const sub1 = this.EnglishService.getAll().subscribe({
       next: (res) => {
         this.paragraphs = res.paragraphData;
@@ -25,10 +27,12 @@ export class ParagraphListComponent implements OnInit {
       },
       error: (err: any) => {
         console.log(err.message);
-
+        this.loading = false;
         //alert('server error');
       },
-      complete: () => {},
+      complete: () => {
+         this.loading = false;
+      },
     });
     this.subs.push(sub1);
   }
@@ -62,25 +66,26 @@ export class ParagraphListComponent implements OnInit {
   }
 
   export() {
-    let folderName='';
+    this.loading = true;
+    let folderName = '';
     //console.log(this.selectedParagraphs);
     if (this.selectedParagraphs.length != 0) {
       this.EnglishService.exportProject(this.selectedParagraphs).subscribe({
         next: (res) => {
           console.log(res);
-          folderName=res.zipFolder;
+          folderName = res.zipFolder;
         },
         error: (err: any) => {
           console.log(err.message);
         },
         complete: () => {
-           window.open(
+          window.open(
             `http://192.168.109.32:3000/paragraph/zip/folder/${folderName}`
           );
+          this.loading = false;
+          this.ngOnInit();
 
-           this.ngOnInit();
-
-/*
+          /*
           this.EnglishService.getProgject(folderName).subscribe({
             next: (res) => {
               console.log(res);

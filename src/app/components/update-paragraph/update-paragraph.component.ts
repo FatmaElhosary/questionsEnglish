@@ -17,6 +17,7 @@ import {
 export class UpdateParagraphComponent implements OnInit {
   paragraphId: string;
   paragraph: any;
+  loading: boolean = false;
   constructor(
     private EnglishService: EnglishService,
     private ActivatedRoute: ActivatedRoute,
@@ -168,6 +169,7 @@ export class UpdateParagraphComponent implements OnInit {
   /////////////////////////////////////////////////////////////////////////////////////////
   UpdateParagraph() {
     if (this.questionForm.valid) {
+     this.loading=true;
       this.EnglishService.updateParagraph(
         this.paragraphId,
         this.questionForm.value
@@ -178,6 +180,7 @@ export class UpdateParagraphComponent implements OnInit {
 
         error: (err: any) => {},
         complete: () => {
+           this.loading = false;
           this.questionForm.reset();
           this._router.navigate([`paragraph/${this.paragraphId}`]);
         },
